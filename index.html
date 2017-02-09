@@ -1,7 +1,6 @@
-<!DOCTYPE html>
-<html>
-<body>
-<h1>Hello World</h1>
+---
+layout: default
+---
+
+<h1>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h1>
 <p>I'm hosted with GitHub Pages.</p>
-</body>
-</html>

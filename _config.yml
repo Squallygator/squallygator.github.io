@@ -1,0 +1,13 @@
+# Site settings
+title: Agile Pays Basque
+header-img: images/logo/Agile-PaysBasque-Rider.jpg
+email: agilepb@gmail.com
+copyright_name: Agile Côte Basque
+description: "La seconde édition d'Agile Pays Basque aura lieu les 22 et 23 Septembre 2016 à Bidart.<BR/>"
+baseurl: "/startbootstrap-clean-blog-jekyll"
+url: "http://www.agile-paysbasque.fr/"
+twitter_username: AgilePB
+github_username:  SquallyGator
+facebook_username:  AgilePaysBasque
+
+theme: jekyll-theme-cayman
