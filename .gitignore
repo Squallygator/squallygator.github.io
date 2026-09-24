@@ -3,3 +3,7 @@ worker/node_modules/
 .dev.vars
 .env
 *.pdf
+Gemfile.lock
+_site/
+.jekyll-cache/
+.bundle/

@@ -1,0 +1,18 @@
+# Aperçu local du site : docker compose up  →  http://localhost:4000
+services:
+  jekyll:
+    image: ruby:3.3
+    working_dir: /site
+    command: >
+      bash -c "bundle config set --local path /bundle &&
+               bundle install &&
+               bundle exec jekyll serve --host 0.0.0.0 --livereload --force_polling"
+    ports:
+      - "4000:4000"
+      - "35729:35729"
+    volumes:
+      - .:/site
+      - bundle:/bundle
+
+volumes:
+  bundle:

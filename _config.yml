@@ -5,6 +5,8 @@ url: https://squallygator.github.io
 exclude:
   - README.md
   - worker
+  - docker-compose.yml
+  - vendor
 linkedin: https://www.linkedin.com/in/pascalmen/
 turnstile_sitekey: 0x4AAAAAAFCBrEiq6z9KpQ59
 cv_worker_url: https://cv-gate.cv-squallygator.workers.dev/
