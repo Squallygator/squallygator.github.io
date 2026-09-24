@@ -1,0 +1,5 @@
+worker/.wrangler/
+worker/node_modules/
+.dev.vars
+.env
+*.pdf

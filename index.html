@@ -1,0 +1,57 @@
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="{{ site.lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ site.title }}</title>
+  <meta name="description" content="{{ site.description }}">
+  <meta property="og:title" content="{{ site.title }}">
+  <meta property="og:description" content="{{ site.description }}">
+  <meta property="og:url" content="{{ site.url }}/">
+  <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+</head>
+<body>
+  <main class="card">
+    <h1>{{ site.title }}</h1>
+    <ul class="links">
+      <li><a href="{{ site.linkedin }}" rel="noopener">LinkedIn</a></li>
+      <li>
+        <div class="cf-turnstile" data-sitekey="{{ site.turnstile_sitekey }}" data-callback="onCaptcha" data-appearance="interaction-only"></div>
+        <button id="cv-btn" class="button" type="button" disabled>Télécharger mon CV (PDF)</button>
+        <p id="cv-msg" role="status"></p>
+      </li>
+    </ul>
+    <img class="qr" src="{{ '/assets/qr.svg' | relative_url }}" width="180" height="180" alt="QR code vers {{ site.url }}/">
+  </main>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <script>
+    const btn = document.getElementById('cv-btn');
+    const msg = document.getElementById('cv-msg');
+    let token = null;
+    function onCaptcha(t) { token = t; btn.disabled = false; }
+    btn.addEventListener('click', async () => {
+      btn.disabled = true;
+      msg.textContent = 'Téléchargement…';
+      try {
+        const r = await fetch('{{ site.cv_worker_url }}', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token }),
+        });
+        if (!r.ok) throw new Error(r.status);
+        const url = URL.createObjectURL(await r.blob());
+        const a = Object.assign(document.createElement('a'), { href: url, download: 'CV.pdf' });
+        document.body.appendChild(a); a.click(); a.remove();
+        msg.textContent = '';
+      } catch (e) {
+        msg.textContent = 'Échec, réessayez.';
+      }
+      token = null;            // un jeton Turnstile n'est utilisable qu'une fois
+      turnstile.reset();
+    });
+  </script>
+</body>
+</html>

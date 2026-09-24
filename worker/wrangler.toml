@@ -1,0 +1,11 @@
+name = "cv-gate"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+
+[vars]
+ALLOWED_ORIGIN = "https://squallygator.github.io"
+
+# id : à remplacer par celui affiché par `wrangler kv namespace create CV`
+[[kv_namespaces]]
+binding = "CV"
+id = "d34f635622e84e1eb0517a5d9cc79dcc"
